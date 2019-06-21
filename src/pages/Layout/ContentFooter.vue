@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="container">
       <nav>
-        <ul>
+        <!-- <ul>
           <li>
             <a href="https://www.creative-tim.com">Creative Tim</a>
           </li>
@@ -21,13 +21,13 @@
               Licenses
             </a>
           </li>
-        </ul>
+        </ul> -->
       </nav>
       <div class="copyright text-center">
         &copy; {{ new Date().getFullYear() }}
-        <a href="https://www.creative-tim.com/?ref=mdf-vuejs" target="_blank"
-          >Creative Tim</a
-        >, made with <i class="fa fa-heart heart"></i> for a better web
+        Made by <a href="https://www.mmngn.com" target="_blank"
+          >Man Nguyen</a
+        > with <i class="fa fa-heart heart"></i>
       </div>
     </div>
   </footer>

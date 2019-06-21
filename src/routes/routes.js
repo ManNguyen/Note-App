@@ -7,14 +7,15 @@ import Typography from "@/pages/Typography.vue";
 import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
-import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
+import Home from "@/pages/Home.vue";
 
 const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/dashboard",
+    redirect: "/home",
     children: [
+      { path: "home", name: "Home", component: Home },
       {
         path: "dashboard",
         name: "Dashboard",
@@ -52,11 +53,6 @@ const routes = [
         path: "notifications",
         name: "Notifications",
         component: Notifications
-      },
-      {
-        path: "upgrade",
-        name: "Upgrade to PRO",
-        component: UpgradeToPRO
       }
     ]
   }

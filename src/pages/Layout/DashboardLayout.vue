@@ -4,6 +4,10 @@
 
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
+      <sidebar-link to="/home">
+        <md-icon>home</md-icon>
+        <p>Home</p>
+      </sidebar-link>
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
@@ -31,10 +35,6 @@
       <sidebar-link to="/notifications">
         <md-icon>notifications</md-icon>
         <p>Notifications</p>
-      </sidebar-link>
-      <sidebar-link to="/upgrade" class="active-pro">
-        <md-icon>unarchive</md-icon>
-        <p>Upgrade to PRO</p>
       </sidebar-link>
     </side-bar>
 
