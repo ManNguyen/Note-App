@@ -5,36 +5,35 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/home">
-        <md-icon>home</md-icon>
-        <p>Home</p>
+        <md-icon style="margin-left:0;">home</md-icon>
       </sidebar-link>
       <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <md-icon style="margin-left:0;">dashboard</md-icon>
+        <!-- <p>Dashboard</p> -->
       </sidebar-link>
       <sidebar-link to="/user">
-        <md-icon>person</md-icon>
-        <p>User Profile</p>
+        <md-icon style="margin-left:0;">person</md-icon>
+        <!-- <p>User Profile</p> -->
       </sidebar-link>
       <sidebar-link to="/table">
-        <md-icon>content_paste</md-icon>
-        <p>Table list</p>
+        <md-icon style="margin-left:0;">content_paste</md-icon>
+        <!-- <p>Table list</p> -->
       </sidebar-link>
       <sidebar-link to="/typography">
-        <md-icon>library_books</md-icon>
-        <p>Typography</p>
+        <md-icon style="margin-left:0;">library_books</md-icon>
+        <!-- <p>Typography</p> -->
       </sidebar-link>
       <sidebar-link to="/icons">
-        <md-icon>bubble_chart</md-icon>
-        <p>Icons</p>
+        <md-icon style="margin-left:0;">bubble_chart</md-icon>
+        <!-- <p>Icons</p> -->
       </sidebar-link>
       <sidebar-link to="/maps">
-        <md-icon>location_on</md-icon>
-        <p>Maps</p>
+        <md-icon style="margin-left:0;">location_on</md-icon>
+        <!-- <p>Maps</p> -->
       </sidebar-link>
       <sidebar-link to="/notifications">
-        <md-icon>notifications</md-icon>
-        <p>Notifications</p>
+        <md-icon style="margin-left:0;">notifications</md-icon>
+        <!-- <p>Notifications</p> -->
       </sidebar-link>
     </side-bar>
 
