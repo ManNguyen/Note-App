@@ -6,15 +6,6 @@
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 // import List from "@editorjs/list";
-new EditorJS({
-  holderId: "editorjs",
-  autofocus: true,
-  tools: {
-    header: Header
-    // list: List
-  }
-});
-
 export default {
   name: "Editor",
   props: {
