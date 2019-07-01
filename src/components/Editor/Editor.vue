@@ -1,32 +1,60 @@
 <template >
-  <div id="editorjs"></div>
+  <div>
+    <div id="editorjs"></div>
+    <button
+      type="button"
+      @click="save();"
+      class="md-button md-dense md-round md-success md-theme-default"
+      style="float:right;"
+    >
+      <div class="md-ripple">
+        <div class="md-button-content">
+          <md-icon>save</md-icon>
+        </div>
+      </div>
+    </button>
+  </div>
 </template>
 
 <script>
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 // import List from "@editorjs/list";
+
 export default {
   name: "Editor",
   props: {
-    msg: String
+    docID: String
+  },
+  data: function() {
+    console.log("data");
+    return {
+      noteObj: new EditorJS({
+        holderId: "editorjs",
+        autofocus: true,
+        tools: {
+          header: Header
+          // list: List
+        },
+        data: JSON.parse(localStorage.getItem(this.docID))
+      })
+    };
   },
   created() {
-    // fetch the data when the view is created and the data is
-    // already being observed
-    console.log("this");
-    new EditorJS({
-      holderId: "editorjs",
-      autofocus: true,
-      tools: {
-        header: Header
-        // list: List
-      }
-    });
+    console.log("created");
+    console.log(this.docID);
   },
   methods: {
-    hello() {
-      console.log("hello world");
+    save() {
+      let id = this.docID;
+      var saveObj = this.noteObj.save().then(savedData => {
+        localStorage.setItem(id, JSON.stringify(savedData, null, 4));
+      });
+    },
+    load() {
+      var savedData = JSON.parse(localStorage.getItem(this.docID));
+
+      this.noteObj.render(savedData);
     }
   }
 };

@@ -6,15 +6,16 @@
     :style="sidebarStyle"
   >
     <div class="logo">
-      <a href="#" class="simple-text logo-mini">
+      <!-- <a href="#" class="simple-text logo-mini">
         <div class="logo-img">
           <img :src="imgLogo" alt>
         </div>
-      </a>
+      </a> -->
       <a
         href="/"
         target="_blank"
         class="simple-text logo-normal"
+        style="text-align:center"
       >{{ title }}</a>
     </div>
     <div class="sidebar-wrapper">
@@ -43,7 +44,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Note App"
+      default: "SAKKA"
     },
     backgroundImage: {
       type: String,

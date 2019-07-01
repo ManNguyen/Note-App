@@ -5,35 +5,11 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/home">
-        <md-icon style="margin-left:0;">home</md-icon>
+        <md-icon style="margin-left:0;">edit</md-icon>
       </sidebar-link>
       <sidebar-link to="/dashboard">
         <md-icon style="margin-left:0;">dashboard</md-icon>
         <!-- <p>Dashboard</p> -->
-      </sidebar-link>
-      <sidebar-link to="/user">
-        <md-icon style="margin-left:0;">person</md-icon>
-        <!-- <p>User Profile</p> -->
-      </sidebar-link>
-      <sidebar-link to="/table">
-        <md-icon style="margin-left:0;">content_paste</md-icon>
-        <!-- <p>Table list</p> -->
-      </sidebar-link>
-      <sidebar-link to="/typography">
-        <md-icon style="margin-left:0;">library_books</md-icon>
-        <!-- <p>Typography</p> -->
-      </sidebar-link>
-      <sidebar-link to="/icons">
-        <md-icon style="margin-left:0;">bubble_chart</md-icon>
-        <!-- <p>Icons</p> -->
-      </sidebar-link>
-      <sidebar-link to="/maps">
-        <md-icon style="margin-left:0;">location_on</md-icon>
-        <!-- <p>Maps</p> -->
-      </sidebar-link>
-      <sidebar-link to="/notifications">
-        <md-icon style="margin-left:0;">notifications</md-icon>
-        <!-- <p>Notifications</p> -->
       </sidebar-link>
     </side-bar>
 
