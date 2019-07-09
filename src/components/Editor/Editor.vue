@@ -26,9 +26,9 @@ export default {
   props: {
     docID: String
   },
-  data: function() {
-    console.log("data");
+  data: function() {   
     return {
+
       noteObj: new EditorJS({
         holderId: "editorjs",
         autofocus: true,
@@ -48,6 +48,7 @@ export default {
     save() {
       let id = this.docID;
       var saveObj = this.noteObj.save().then(savedData => {
+        var data = savedData;
         localStorage.setItem(id, JSON.stringify(savedData, null, 4));
       });
     },

@@ -4,7 +4,7 @@
       <div class="md-layout-item">
         <md-card>
           <md-card-content>
-                 <Editor docID="tempDoc"></Editor>
+                 <Editor :docID="this.$route.params.note_id"></Editor>
           </md-card-content>
         </md-card>
       </div>
@@ -18,6 +18,15 @@ import Editor from "../components/Editor/Editor.vue";
 export default {
   components:{
     Editor
+  },
+  created() {
+    console.log("created");
+    console.log(this.$route.params.note_id);
+  },
+  methods:{
+      test:function(){
+       
+      }
   }
 }
 </script>

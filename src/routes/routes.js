@@ -8,6 +8,9 @@ import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Home from "@/pages/Home.vue";
+import Note from "@/pages/Note.vue";
+
+
 
 const routes = [
   {
@@ -15,7 +18,15 @@ const routes = [
     component: DashboardLayout,
     redirect: "/home",
     children: [
-      { path: "home", name: "Home", component: Home },
+      { path: "home",
+        name: "Home", 
+        component: Home 
+      },
+      { 
+        path: "note/:note_id",
+        name: "Note", 
+        component: Note 
+      },
       {
         path: "dashboard",
         name: "Dashboard",
