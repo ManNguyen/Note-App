@@ -11,12 +11,22 @@
         <md-icon style="margin-left:0;">dashboard</md-icon>
         <!-- <p>Dashboard</p> -->
       </sidebar-link>
+
+      <li class="md-list-item">
+        <a class="md-list-item-router md-list-item-container md-button-clean" v-on:click="test()">
+          <div class="md-list-item-content md-ripple">
+            <slot>
+              <md-icon style="margin-left:0;">add</md-icon>
+            </slot>
+          </div>
+        </a>
+      </li>
     </side-bar>
 
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <dashboard-content> </dashboard-content>
+      <dashboard-content></dashboard-content>
 
       <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>
@@ -28,13 +38,28 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
-
+import {idbMixin} from '../../components/IndexDB/IndexDBmixin';
 export default {
   components: {
     TopNavbar,
     DashboardContent,
     ContentFooter,
     MobileMenu
+  },
+  mixins:[idbMixin],
+  created(){
+    // this.db().deleteDataBase();
+  },
+  methods:{
+    test(){
+      //var postID =1;
+      // this.$router.push('/note/'+postID);
+      this.addPage();
+    },
+    addPage(){
+      // this.db().new();
+      this.db().selectAll();
+    }
   }
 };
 </script>
