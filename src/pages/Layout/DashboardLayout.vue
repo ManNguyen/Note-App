@@ -38,7 +38,7 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
-import {idbMixin} from '../../components/IndexDB/IndexDBmixin';
+import { idbMixin } from "../../components/IndexDB/IndexDBmixin";
 export default {
   components: {
     TopNavbar,
@@ -46,19 +46,25 @@ export default {
     ContentFooter,
     MobileMenu
   },
-  mixins:[idbMixin],
-  created(){
+  mixins: [idbMixin],
+  created() {
     // this.db().deleteDataBase();
   },
-  methods:{
-    test(){
+  methods: {
+    test() {
       //var postID =1;
-      // this.$router.push('/note/'+postID);
+
       this.addPage();
     },
-    addPage(){
-      // this.db().new();
-      this.db().selectAll();
+    addPage() {
+      this.db()
+        .new()
+        .then(postID => {
+          this.$router.push("/note/" + postID);
+        });
+      // this.db().selectAll();
+
+      // this.db().getNote(1);
     }
   }
 };
