@@ -27,12 +27,11 @@ export const idbMixin = {
         },
         new() {
           var note = { date: new Date("2019-01-01") };
-          console.log("new");
           return dbPromise
             .then(db =>
               db.add(storeName, {
-                title: "Article 1",
-                date: new Date("2019-01-01"),
+                title: "Untitled",
+                date: new Date(),
                 body: "…"
               })
             );
@@ -44,6 +43,11 @@ export const idbMixin = {
               console.log(x);
             });
           });
+        },
+        getAll(){
+          return dbPromise.then(db =>
+            db.getAll(storeName)
+            );
         },
         selectAll() {
           console.log("All");

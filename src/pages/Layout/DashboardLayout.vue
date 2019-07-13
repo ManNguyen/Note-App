@@ -9,14 +9,16 @@
       </sidebar-link>
       <sidebar-link to="/dashboard">
         <md-icon style="margin-left:0;">dashboard</md-icon>
-        <!-- <p>Dashboard</p> -->
+      </sidebar-link>
+      <sidebar-link to="/folder">
+        <md-icon style="margin-left:0;">dashboard</md-icon>
       </sidebar-link>
 
       <li class="md-list-item">
         <a class="md-list-item-router md-list-item-container md-button-clean" v-on:click="test()">
           <div class="md-list-item-content md-ripple">
             <slot>
-              <md-icon style="margin-left:0;">add</md-icon>
+              <md-icon style="margin-left:0;">note_add</md-icon>
             </slot>
           </div>
         </a>

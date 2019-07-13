@@ -8,6 +8,7 @@ import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Home from "@/pages/Home.vue";
+import Folder from "@/pages/Folder";
 import Note from "@/pages/Note.vue";
 
 
@@ -31,6 +32,11 @@ const routes = [
         path: "dashboard",
         name: "Dashboard",
         component: Dashboard
+      },
+      {
+        path: "folder",
+        name: "Folder",
+        component: Folder
       },
       {
         path: "user",

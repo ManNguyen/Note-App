@@ -21,9 +21,6 @@ import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import {idbMixin} from '../IndexDB/IndexDBmixin';
 
-// import List from "@editorjs/list";
-
-
 export default {
   name: "Editor",
   mixins:[idbMixin],
