@@ -4,21 +4,24 @@ export const idbMixin = {
     testMixin() {
       console.log("hello from mixin");
     },
+  
     db() {
       var idbScheme = "sakka-idb";
-      var storeName = "notes-idb";
 
-      var dbPromise = openDB(idbScheme, 1, {
+      var noteStoreTbl = "notesStorage";
+
+      var dbPromise = openDB(idbScheme, 3, {
         upgrade(db) {
-          const store = db.createObjectStore(storeName, {
-            keyPath: "id",
-            autoIncrement: true
-          });
-          // Create an index on the 'date' property of the objects.
+          if (!db.objectStoreNames.contains(noteStoreTbl)) {
+            var objectStore = db.createObjectStore(noteStoreTbl, { keyPath: 'id',autoIncrement: true });
+          }else{
+            console.log("storeExisted");
+          }
         }
       });
 
       return {
+        
         get(key) {
           return JSON.parse(localStorage.getItem(key));
         },
@@ -27,35 +30,52 @@ export const idbMixin = {
         },
         new() {
           var note = { date: new Date("2019-01-01") };
+          var defaultBody =  {
+            blocks:[
+              {
+                data:{
+                  level: 1,
+                  text: "Untitled"
+                },
+                type: "header"
+              }
+            ]
+    
+          };
+
           return dbPromise
             .then(db =>
-              db.add(storeName, {
+              db.add(noteStoreTbl, {
                 title: "Untitled",
                 date: new Date(),
-                body: "…"
+                bodyBlock: defaultBody
               })
             );
 
         },
+
         getNote(key) {
-          dbPromise.then(db => {
-            db.get(storeName, key).then(x => {
-              console.log(x);
-            });
-          });
+          return dbPromise.then(db => db.get(noteStoreTbl,Number(key)));
         },
+        updateNote(data){
+
+          return dbPromise.then(db => db.put(noteStoreTbl,data));
+        },
+
         getAll(){
           return dbPromise.then(db =>
-            db.getAll(storeName)
+            db.getAll(noteStoreTbl)
             );
         },
         selectAll() {
-          console.log("All");
           dbPromise.then(db => {
-            db.getAllKeys(storeName).then(x => {
+            db.getAllKeys(noteStoreTbl).then(x => {
               console.log(x);
             });
           });
+        },
+        saveNote(key){
+
         },
         deleteDataBase() {
           deleteDB(idbScheme).then(x => {

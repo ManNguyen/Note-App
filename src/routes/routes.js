@@ -17,7 +17,7 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/home",
+    redirect: "/folder",
     children: [
       { path: "home",
         name: "Home", 

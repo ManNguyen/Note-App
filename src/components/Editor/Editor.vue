@@ -29,28 +29,39 @@ export default {
   },
   data: function() {   
     return {
-
-      noteObj: new EditorJS({
+      editor: Object,
+      note: Object
+    };
+  },
+  created() {
+    this.db().getNote(this.docID).then((note)=> {
+        console.log(note);
+        this.note = note;
+        this.editor = new EditorJS({
         holderId: "editorjs",
         autofocus: true,
         tools: {
           header: Header
           // list: List
         },
-        data: this.db().get(this.docID)
-      })
-    };
-  },
-  created() {
-    console.log("created");
-    console.log(this.docID);
-
+        data: note.bodyBlock});
+ 
+      });                                
   },
   methods: {
     save() {
       let id = this.docID;
-      var saveObj = this.noteObj.save().then(savedData => {
-         this.db().update(id,savedData);
+
+      var saveObj = this.editor.save().then(savedData => {
+
+      var parsedobj = JSON.parse(JSON.stringify(this.note));
+      // delete parsedobj.id; 
+     
+      parsedobj.bodyBlock = savedData;
+          console.log(parsedobj);
+        //  this.db().update(id,savedData);
+
+         this.db().updateNote(parsedobj);
       });
     },
   }
