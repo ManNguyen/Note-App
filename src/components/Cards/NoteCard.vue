@@ -7,7 +7,7 @@
             <md-icon>note</md-icon>
             {{noteInfo.title}}
           </h4>
-          <p class="category date">{{noteInfo.date}}</p>
+          <p class="category date">{{timeFilter()}}</p>
         </div>
         <div></div>
       </md-card-content>
@@ -17,12 +17,16 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   name: "note-card",
   props: { noteInfo: Object },
   methods: {
     click() {
       this.$router.push("/note/" + this.noteInfo.id);
+    },
+    timeFilter(){
+      return moment(this.noteInfo.date).format('MMMM Do YYYY, h:mm');
     }
   }
 };
