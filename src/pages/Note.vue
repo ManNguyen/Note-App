@@ -1,7 +1,7 @@
 <template>
     <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item">
+      <div class="md-layout-item note-view">
         <md-card>
           <md-card-content>
                  <Editor :docID="this.$route.params.note_id"></Editor>
@@ -32,5 +32,7 @@ export default {
 </script>
 
 <style>
-
+.note-view{
+  display: contents;
+}
 </style>

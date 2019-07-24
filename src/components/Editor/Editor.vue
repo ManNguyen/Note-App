@@ -75,11 +75,11 @@ export default {
   border: 1px black;
 }
 .codex-editor {
-  width: 80%;
+  width: 100%;
 }
 .ce-block__content {
   position: relative;
-  max-width: 650px;
+  max-width: unset;
   margin: 0 50px 0 30px;
 }
 </style>
