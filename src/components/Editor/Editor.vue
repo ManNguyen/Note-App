@@ -19,51 +19,65 @@
 <script>
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
-import {idbMixin} from '../IndexDB/IndexDBmixin';
+import { idbMixin } from "../IndexDB/IndexDBmixin";
 
 export default {
   name: "Editor",
-  mixins:[idbMixin],
+  mixins: [idbMixin],
   props: {
     docID: String
   },
-  data: function() {   
+  data: function() {
     return {
       editor: Object,
       note: Object
     };
   },
   created() {
-    this.db().getNote(this.docID).then((note)=> {
+    this.db()
+      .getNote(this.docID)
+      .then(note => {
         console.log(note);
         this.note = note;
         this.editor = new EditorJS({
-        holderId: "editorjs",
-        autofocus: true,
-        tools: {
-          header: Header
-          // list: List
-        },
-        data: note.bodyBlock});
- 
-      });                                
+          holderId: "editorjs",
+          autofocus: true,
+          tools: {
+            header: Header
+            // list: List
+          },
+          data: note.bodyBlock
+        });
+      });
+  },
+  destroyed() {
+    this.save();
   },
   methods: {
     save() {
       let id = this.docID;
-
       var saveObj = this.editor.save().then(savedData => {
 
-      var parsedobj = JSON.parse(JSON.stringify(this.note));
-      // delete parsedobj.id; 
-     
-      parsedobj.bodyBlock = savedData;
-          console.log(parsedobj);
-        //  this.db().update(id,savedData);
+        //This to get the object out of obsever
+        var parsedobj = JSON.parse(JSON.stringify(this.note));
+        parsedobj.bodyBlock = savedData;
 
-         this.db().updateNote(parsedobj);
+        var newTitle = parsedobj.title; 
+
+        var titleBlocks =  savedData.blocks.filter(block => block.type == "header").sort((a,b)=> a.data.level-b.data.level );
+        //Title should be updated to the first header block,
+        console.log(titleBlocks);
+        if(titleBlocks.length > 0){
+          newTitle = titleBlocks[0].data.text;
+        }
+       
+        parsedobj.title = newTitle;
+        parsedobj.date = Date.now();
+        console.log(parsedobj);
+        
+        this.db().updateNote(parsedobj);
       });
-    },
+    }
   }
 };
 </script>

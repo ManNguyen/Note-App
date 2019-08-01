@@ -21,7 +21,6 @@ export default {
   created() {
     this.db().getAll().then(
       noteList=>{
-
        console.log(noteList);
         this.thumbnailList = noteList.map((item)=>{
           return {
@@ -30,7 +29,7 @@ export default {
             date:item.date
           }
         }
-        );
+        ).sort((a,b)=> a.date-b.date);
  
       }
     );
