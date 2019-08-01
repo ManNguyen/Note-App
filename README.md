@@ -1,6 +1,6 @@
 # Note-App
 
-A note taking app built in vue.js and editor.js in the front end and Express.js in the back end
+An offline first note taking app built in vue.js and editor.js in the front end and Express.js in the back end. The note data is stored locally using indexDB storage.
 
 ## To Run
 clone this repo 
@@ -16,3 +16,5 @@ if you have heroku , after setting up the heroku remote just `git push heroku ma
 [VueJS](https://vuejs.org/)
 
 [EditorJS](https://editorjs.io)
+
+[IDB wrapper for IndexDB](https://www.npmjs.com/package/idb)
