@@ -1,6 +1,6 @@
 # Note-App
 
-An offline first note taking app built in vue.js and editor.js in the front end and Express.js in the back end. The note data is stored locally using indexDB storage.
+An offline first note taking app built in vue.js and editor.js in the front end and Express.js in the back end. Notes are stored locally using indexDB storage.
 
 ## To Run
 clone this repo 
