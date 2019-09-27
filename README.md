@@ -6,6 +6,7 @@ An offline first note taking app built in vue.js and editor.js in the front end 
 clone this repo 
 run `npm install` to get all of the packages
 run `npm run dev` to run on local 
+run `npm run build` to build to distribution
 
 if you have heroku , after setting up the heroku remote just `git push heroku master` heroku will handle the rest.
 
