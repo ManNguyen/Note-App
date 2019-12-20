@@ -1,23 +1,38 @@
 <template>
   <md-card>
-    <div class="notecard" v-on:click="click()">
+    <div class="notecard" >
       <md-card-content>
         <div class="header">
           <h4 class="title">
             <md-icon>note</md-icon>
             {{noteInfo.title}}
           </h4>
-          <p class="category date">{{timeFilter()}}</p>
+
+          <div>
+            <p class="category date">{{timeFilter()}}</p>
+          </div>
         </div>
-        <div></div>
       </md-card-content>
-      <md-card-actions></md-card-actions>
+      <md-card-actions>
+        <div>
+          <button type="button" class="md-button md-small" v-on:click="click()">
+            <div class="md-ripple" style="padding: unset;">
+              <md-icon>launch</md-icon>
+            </div>
+          </button>
+          <button type="button" class="md-button md-small">
+            <div class="md-ripple" style="padding: unset;">
+              <md-icon>delete</md-icon>
+            </div>
+          </button>
+        </div>
+      </md-card-actions>
     </div>
   </md-card>
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 export default {
   name: "note-card",
   props: { noteInfo: Object },
@@ -25,8 +40,8 @@ export default {
     click() {
       this.$router.push("/note/" + this.noteInfo.id);
     },
-    timeFilter(){
-      return moment(this.noteInfo.date).format('MMMM Do YYYY, h:mm');
+    timeFilter() {
+      return moment(this.noteInfo.date).format("MMMM Do YYYY, h:mm");
     }
   }
 };
