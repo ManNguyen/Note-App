@@ -50,11 +50,6 @@ export default {
     // this.db().deleteDataBase();
   },
   methods: {
-    test() {
-      //var postID =1;
-
-      this.addPage();
-    },
     addPage() {
       this.db()
         .new()

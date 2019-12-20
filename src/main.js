@@ -3,6 +3,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App";
+import { EventBus } from './event-bus.js';
 
 // router setup
 import routes from "./routes/routes";
@@ -36,6 +37,14 @@ new Vue({
   el: "#app",
   render: h => h(App),
   router,
+  watch: {
+    $route(to, from) {
+
+      EventBus.$emit('route-updated', { from: from, to: to });
+
+
+    }
+  },
   data: {
     Chartist: Chartist
   }

@@ -33,6 +33,7 @@ export default {
       note: Object
     };
   },
+  //called when page accessed
   created() {
     this.db()
       .getNote(this.docID)

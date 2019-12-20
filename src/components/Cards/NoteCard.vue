@@ -14,14 +14,14 @@
         </div>
       </md-card-content>
       <md-card-actions>
-        <div>
-          <button type="button" class="md-button md-small" v-on:click="click()">
-            <div class="md-ripple" style="padding: unset;">
+        <div id="cardButtonDiv">
+          <button type="button" class="md-button md-small" v-on:click="click">
+            <div class="md-ripple">
               <md-icon>launch</md-icon>
             </div>
           </button>
           <button type="button" class="md-button md-small">
-            <div class="md-ripple" style="padding: unset;">
+            <div class="md-ripple">
               <md-icon>delete</md-icon>
             </div>
           </button>
@@ -48,15 +48,6 @@ export default {
 </script>
 
 <style>
-.notecard {
-  cursor: pointer;
-
-  overflow: auto;
-}
-.notecard:hover {
-  background-color: #e0e0ef;
-  transition: background-color 200ms linear;
-}
 
 .notecard:after {
   background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
@@ -72,11 +63,15 @@ export default {
   transition: 0s;
 }
 
+
 .notecard .header > .title,
 .date {
   display: inline-block;
 }
 .notecard .header > .date {
   float: right;
+}
+#cardButtonDiv .md-button.md-small >.md-ripple{
+  padding: 5px;
 }
 </style>
