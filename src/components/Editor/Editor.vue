@@ -70,6 +70,8 @@ export default {
         console.log(titleBlocks);
         if(titleBlocks.length > 0){
           newTitle = titleBlocks[0].data.text;
+        }else{
+          newTitle = "No Title";
         }
        
         parsedobj.title = newTitle;

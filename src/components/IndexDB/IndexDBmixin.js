@@ -1,86 +1,77 @@
 import { openDB, deleteDB, wrap, unwrap } from "idb";
+
+const _idb_scheme = "sakka-idb";
+const _note_tbl = "notesStorage";
+const _version = 3;
+
 export const idbMixin = {
   methods: {
     testMixin() {
       console.log("hello from mixin");
     },
-  
+
     db() {
-      var idbScheme = "sakka-idb";
+      var dbPromise = openDB(_idb_scheme, _version, {
 
-      var noteStoreTbl = "notesStorage";
-
-      var dbPromise = openDB(idbScheme, 3, {
         upgrade(db) {
-          if (!db.objectStoreNames.contains(noteStoreTbl)) {
-            var objectStore = db.createObjectStore(noteStoreTbl, { keyPath: 'id',autoIncrement: true });
-          }else{
+
+          if (!db.objectStoreNames.contains(_note_tbl)) {
+            var objectStore = db.createObjectStore(_note_tbl, { keyPath: 'id', autoIncrement: true });
+          } else {
             console.log("storeExisted");
           }
         }
       });
 
       return {
-        
-        get(key) {
-          return JSON.parse(localStorage.getItem(key));
-        },
-        update(key, data) {
-          localStorage.setItem(key, JSON.stringify(data, null, 4));
-        },
-        new() {
-          var note = { date: new Date("2019-01-01") };
-          var defaultBody =  {
-            blocks:[
+        async new() {
+
+          var defaultBody = {
+            blocks: [
               {
-                data:{
+                data: {
                   level: 1,
                   text: "Untitled"
                 },
                 type: "header"
               }
             ]
-    
+
           };
 
-          return dbPromise
-            .then(db =>
-              db.add(noteStoreTbl, {
-                title: "Untitled",
-                date: new Date(),
-                bodyBlock: defaultBody
-              })
-            );
-
-        },
-
-        getNote(key) {
-          return dbPromise.then(db => db.get(noteStoreTbl,Number(key)));
-        },
-        updateNote(data){
-
-          return dbPromise.then(db => db.put(noteStoreTbl,data));
-        },
-
-        getAll(){
-          return dbPromise.then(db =>
-            db.getAll(noteStoreTbl)
-            );
-        },
-        selectAll() {
-          dbPromise.then(db => {
-            db.getAllKeys(noteStoreTbl).then(x => {
-              console.log(x);
-            });
+          const db = await dbPromise;
+          return await db.add(_note_tbl, {
+            title: "Untitled",
+            date: new Date(),
+            bodyBlock: defaultBody
           });
-        },
-        saveNote(key){
 
         },
-        deleteDataBase() {
-          deleteDB(idbScheme).then(x => {
-            console.log(x);
-          });
+        async getNote(key) {
+          let db = await dbPromise;
+          return await db.get(_note_tbl, Number(key));
+        },
+        async updateNote(data) {
+          const db = await dbPromise;
+          return await db.put(_note_tbl, data);
+        },
+
+        async getAll() {
+          const db = await dbPromise;
+          return await db.getAll(_note_tbl);
+        },
+
+        async selectAll() {
+          const db = await dbPromise;
+          const notes = await db.getAllKeys(_note_tbl);
+          console.log(notes);
+
+        },
+        async deleteDataBase() {
+
+          const resolve = deleteDB(_idb_scheme);
+          console.log(resolve);
+
         }
       };
     }
