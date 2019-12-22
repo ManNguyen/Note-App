@@ -6,7 +6,7 @@
         :key="thumbnail.id"
         v-for="thumbnail in thumbnailList"
       >
-        <note-card :noteInfo="thumbnail"></note-card>
+        <note-card :noteInfo="thumbnail" @onDelete="deleteCard"></note-card>
       </div>
     </div>
   </div>
@@ -19,50 +19,30 @@ export default {
   components: { noteCard },
   mixins: [idbMixin],
   created() {
-    this.db().getAll().then(
-      noteList=>{
-       console.log(noteList);
-        this.thumbnailList = noteList.map((item)=>{
-          return {
-            id:item.id,
-            title:item.title,
-            date:item.date
-          }
-        }
-        ).sort((a,b)=> b.date -a.date);
- 
-      }
-    );
+    this.getCards();
+  },
+  methods: {
+     deleteCard(card) {
+      this.db().deleteNote(card.id).then(()=>this.getCards());
+    },
+    getCards() {
+      this.db()
+        .getAll()
+        .then(noteList => {
+          console.log(noteList);
+          this.thumbnailList = noteList
+            .map(item => ({
+              id: item.id,
+              title: item.title,
+              date: item.date
+            }))
+            .sort((a, b) => b.date - a.date);
+        });
+    }
   },
   data: function() {
     return {
-      thumbnailList: [
-        {
-          id: 1,
-          title: "testTitle",
-          date: "2019-1-1"
-        },
-        {
-          id: 2,
-          title: "testTitle",
-          date: "2019-1-1"
-        },
-        {
-          id: 3,
-          title: "testTitle",
-          date: "2019-1-1"
-        },
-        {
-          id: 4,
-          title: "testTitle",
-          date: "2019-1-1"
-        },
-        {
-          id: 5,
-          title: "testTitle",
-          date: "2019-1-1"
-        }
-      ]
+      thumbnailList: []
     };
   }
 };

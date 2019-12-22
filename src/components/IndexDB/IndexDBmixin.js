@@ -55,7 +55,11 @@ export const idbMixin = {
           const db = await dbPromise;
           return await db.put(_note_tbl, data);
         },
-
+        async deleteNote(key){
+          console.log('delete'+ key);
+          const db = await dbPromise;
+          return await db.delete(_note_tbl, key);
+        },
         async getAll() {
           const db = await dbPromise;
           return await db.getAll(_note_tbl);
@@ -67,6 +71,7 @@ export const idbMixin = {
           console.log(notes);
 
         },
+
         async deleteDataBase() {
 
           const resolve = deleteDB(_idb_scheme);

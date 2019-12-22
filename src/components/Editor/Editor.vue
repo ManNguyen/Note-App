@@ -71,7 +71,7 @@ export default {
         if(titleBlocks.length > 0){
           newTitle = titleBlocks[0].data.text;
         }else{
-          newTitle = "No Title";
+          newTitle = "Note #"+id;
         }
        
         parsedobj.title = newTitle;

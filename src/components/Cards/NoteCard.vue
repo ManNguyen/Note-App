@@ -15,12 +15,12 @@
       </md-card-content>
       <md-card-actions>
         <div id="cardButtonDiv">
-          <button type="button" class="md-button md-small" v-on:click="click">
+          <button type="button" class="md-button md-small" v-on:click="launch">
             <div class="md-ripple">
               <md-icon>launch</md-icon>
             </div>
           </button>
-          <button type="button" class="md-button md-small">
+          <button type="button" class="md-button md-small" v-on:click="deleteNote">
             <div class="md-ripple">
               <md-icon>delete</md-icon>
             </div>
@@ -37,8 +37,11 @@ export default {
   name: "note-card",
   props: { noteInfo: Object },
   methods: {
-    click() {
+    launch() {
       this.$router.push("/note/" + this.noteInfo.id);
+    },
+    deleteNote(){
+      this.$emit("onDelete",this.noteInfo);
     },
     timeFilter() {
       return moment(this.noteInfo.date).format("MMMM Do YYYY, h:mm");
