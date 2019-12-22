@@ -2,7 +2,7 @@
   <md-toolbar md-elevation="0" class="md-transparent">
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">{{ $route.name }}</h3>
+        <h3 class="md-title">{{ getRouteName() }}</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -90,6 +90,12 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+    getRouteName(){
+      if (this.$route.name ==="Note"){
+        return "Note #"+ this.$route.params.note_id;
+      }
+      return  this.$route.name ;
     }
   }
 };

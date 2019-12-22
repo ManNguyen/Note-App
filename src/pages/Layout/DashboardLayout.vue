@@ -56,9 +56,6 @@ export default {
         .then(postID => {
           this.$router.push("/note/" + postID);
         });
-      // this.db().selectAll();
-
-      // this.db().getNote(1);
     }
   }
 };

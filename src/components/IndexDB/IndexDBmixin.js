@@ -43,6 +43,7 @@ export const idbMixin = {
           return await db.add(_note_tbl, {
             title: "Untitled",
             date: new Date(),
+            createdDate: new Date(),
             bodyBlock: defaultBody
           });
 
@@ -56,20 +57,12 @@ export const idbMixin = {
           return await db.put(_note_tbl, data);
         },
         async deleteNote(key){
-          console.log('delete'+ key);
           const db = await dbPromise;
           return await db.delete(_note_tbl, key);
         },
         async getAll() {
           const db = await dbPromise;
           return await db.getAll(_note_tbl);
-        },
-
-        async selectAll() {
-          const db = await dbPromise;
-          const notes = await db.getAllKeys(_note_tbl);
-          console.log(notes);
-
         },
 
         async deleteDataBase() {
