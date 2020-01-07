@@ -1,4 +1,5 @@
 import { openDB, deleteDB, wrap, unwrap } from "idb";
+import {EmptyNote} from "./noteTemplate";
 
 const _idb_scheme = "sakka-idb";
 const _note_tbl = "notesStorage";
@@ -12,7 +13,6 @@ export const idbMixin = {
 
     db() {
       var dbPromise = openDB(_idb_scheme, _version, {
-
         upgrade(db) {
 
           if (!db.objectStoreNames.contains(_note_tbl)) {
@@ -25,28 +25,8 @@ export const idbMixin = {
 
       return {
         async new() {
-
-          var defaultBody = {
-            blocks: [
-              {
-                data: {
-                  level: 1,
-                  text: "Untitled"
-                },
-                type: "header"
-              }
-            ]
-
-          };
-
           const db = await dbPromise;
-          return await db.add(_note_tbl, {
-            title: "Untitled",
-            date: new Date(),
-            createdDate: new Date(),
-            bodyBlock: defaultBody
-          });
-
+          return await db.add(_note_tbl, EmptyNote);
         },
         async getNote(key) {
           let db = await dbPromise;
@@ -56,7 +36,7 @@ export const idbMixin = {
           const db = await dbPromise;
           return await db.put(_note_tbl, data);
         },
-        async deleteNote(key){
+        async deleteNote(key) {
           const db = await dbPromise;
           return await db.delete(_note_tbl, key);
         },
@@ -66,7 +46,6 @@ export const idbMixin = {
         },
 
         async deleteDataBase() {
-
           const resolve = deleteDB(_idb_scheme);
           console.log(resolve);
 
