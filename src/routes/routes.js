@@ -10,6 +10,7 @@ import Notifications from "@/pages/Notifications.vue";
 import Home from "@/pages/Home.vue";
 import Folder from "@/pages/Folder";
 import Note from "@/pages/Note.vue";
+import Settings from "@/pages/Settings";
 
 
 
@@ -37,6 +38,11 @@ const routes = [
         path: "folder",
         name: "Folder",
         component: Folder
+      },
+      {
+        path: "settings",
+        name: "Settings",
+        component: Settings
       },
       {
         path: "user",
