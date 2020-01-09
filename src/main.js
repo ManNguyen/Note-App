@@ -41,6 +41,7 @@ new Vue({
     $route(to, from) {
       //When route change collapse the side bar
       this.$sidebar.displaySidebar(false);
+      
       EventBus.$emit('route-updated', { from: from, to: to });
 
 

@@ -1,9 +1,10 @@
 import { openDB, deleteDB, wrap, unwrap } from "idb";
-import {EmptyNote} from "./noteTemplate";
-
+import { EmptyNote } from "./noteTemplate";
+import Constants from "../../constants";
 const _idb_scheme = "sakka-idb";
 const _note_tbl = "notesStorage";
-const _version = 3;
+const _settings_tbl = "settingsStorage";
+const _version = 16;
 
 export const idbMixin = {
   methods: {
@@ -13,13 +14,57 @@ export const idbMixin = {
 
     db() {
       var dbPromise = openDB(_idb_scheme, _version, {
-        upgrade(db) {
+        upgrade(db, oldVersion, newVersion, transaction) {
 
+          console.log("upgrade idb from version " + oldVersion + " to version " + newVersion);
+          //Verify Notes Table
           if (!db.objectStoreNames.contains(_note_tbl)) {
-            var objectStore = db.createObjectStore(_note_tbl, { keyPath: 'id', autoIncrement: true });
+            console.log("Creating Notes Storage ...")
+            db.createObjectStore(_note_tbl, { keyPath: 'id', autoIncrement: true })
+            console.log('Notes Storage Created !');
           } else {
-            console.log("storeExisted");
+            console.log("Notes Storage is up to date.");
           }
+
+          //Verify Setting Table
+          if (!db.objectStoreNames.contains(_settings_tbl)) {
+            console.log("Creating Settings Storage ...")
+            db.createObjectStore(_settings_tbl, { keyPath: 'name', autoIncrement: false })
+            console.log('Settings Storage Created !');
+
+
+
+          } else {
+            console.log("Settings Storage is up to date.");
+          }
+
+          var settingsStorage = transaction.objectStore(_settings_tbl);
+          settingsStorage.get(Constants.SETTINGS.DEVMODE).then(
+            res => {
+              if (res == undefined) {
+                console.log('Set Default Dev Mode.');
+                settingsStorage.add({
+                  'name': Constants.SETTINGS.DEVMODE,
+                  'setting': false
+
+                })
+              }
+            });
+
+
+
+          // var req = settingsStorage.openCursor(Constants.SETTINGS.DEVMODE);
+          // req.onsuccess = function (e) {
+          //   var cursor = e.target.result;
+          //   if (cursor) { // key already exist
+
+          //   } else { // key not exist
+
+          //     console.log("devMode not exists");
+          //   }
+          // };
+
+
         }
       });
 
@@ -45,6 +90,13 @@ export const idbMixin = {
           return await db.getAll(_note_tbl);
         },
 
+        async getSettings() {
+          const db = await dbPromise;
+          let x = await db.get(_settings_tbl, Constants.SETTINGS.DEVMODE);
+          console.log(x);
+
+          return await db.getAll(_settings_tbl);
+        },
         async deleteDataBase() {
           const resolve = deleteDB(_idb_scheme);
           console.log(resolve);

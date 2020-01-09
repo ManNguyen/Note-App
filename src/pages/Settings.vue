@@ -9,7 +9,11 @@
           <md-card-content>
             <div class="md-layout">
               <div class="md-layout-item md-medium-size-100">
-                <switch-button v-model="switch1" color="#43a047">Enable Developer Mode</switch-button>
+                <switch-button
+                  v-model="isDevMode"
+                  v-on:toggle="setDevMod"
+                  color="#43a047"
+                >Enable Developer Mode</switch-button>
               </div>
             </div>
           </md-card-content>
@@ -21,16 +25,23 @@
 
 <script>
 import switchButton from "../components/Misc/SwitchButton";
+import { idbMixin } from "../components/IndexDB/IndexDBmixin";
 export default {
   components: { switchButton },
+  mixins: [idbMixin],
   data() {
     return {
       type: ["", "info", "success", "warning", "danger"],
       notifications: {
         topCenter: false
       },
-      switch1: true
+      isDevMode: false
     };
+  },
+  created(){
+    console.log("hello settings");
+    
+    this.db().getSettings ().then(x =>{console.log(x)});
   },
   methods: {
     notifyVue(verticalAlign, horizontalAlign) {
@@ -43,6 +54,9 @@ export default {
         verticalAlign: verticalAlign,
         type: this.type[color]
       });
+    },
+    setDevMod(b) {
+      console.log(b);
     }
   }
 };
