@@ -13,10 +13,25 @@
         </div>
       </div>
     </button>
+
+    <button
+      v-if="isDevMode"
+      type="button"
+      @click="save();"
+      class="md-button md-dense md-round md-warning md-theme-default"
+      style="float:right;"
+    >
+      <div class="md-ripple">
+        <div class="md-button-content">
+          <md-icon>open_in_browser</md-icon>Open As JSON
+        </div>
+      </div>
+    </button>
   </div>
 </template>
 
 <script>
+import Constants from "../../constants"
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import { idbMixin } from "../IndexDB/IndexDBmixin";
@@ -30,7 +45,8 @@ export default {
   data: function() {
     return {
       editor: Object,
-      note: Object
+      note: Object,
+      isDevMode: false
     };
   },
   //called when page accessed
@@ -50,6 +66,9 @@ export default {
           data: note.bodyBlock
         });
       });
+    this.db()
+      .getSetting(Constants.SETTINGS.DEVMODE)
+      .then(st => {this.isDevMode = st.setting});
   },
   destroyed() {
     this.save();
@@ -58,26 +77,27 @@ export default {
     save() {
       let id = this.docID;
       var saveObj = this.editor.save().then(savedData => {
-
         //This to get the object out of obsever
         var parsedobj = JSON.parse(JSON.stringify(this.note));
         parsedobj.bodyBlock = savedData;
 
-        var newTitle = parsedobj.title; 
+        var newTitle = parsedobj.title;
 
-        var titleBlocks =  savedData.blocks.filter(block => block.type == "header").sort((a,b)=> a.data.level-b.data.level );
+        var titleBlocks = savedData.blocks
+          .filter(block => block.type == "header")
+          .sort((a, b) => a.data.level - b.data.level);
         //Title should be updated to the first header block,
         console.log(titleBlocks);
-        if(titleBlocks.length > 0){
+        if (titleBlocks.length > 0) {
           newTitle = titleBlocks[0].data.text;
-        }else{
-          newTitle = "Note #"+id;
+        } else {
+          newTitle = "Note #" + id;
         }
-       
+
         parsedobj.title = newTitle;
         parsedobj.date = Date.now();
         console.log(parsedobj);
-        
+
         this.db().updateNote(parsedobj);
       });
     }

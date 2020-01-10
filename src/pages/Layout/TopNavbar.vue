@@ -26,9 +26,9 @@
             </md-autocomplete>
           </div> -->
           <md-list>
-            <md-list-item href="#/folder">
-              <i class="material-icons">dashboard</i>
-              <p class="hidden-lg hidden-md">Dashboard</p>
+            <md-list-item href="#/settings">
+              <i class="material-icons">settings_applications</i>
+              <p class="hidden-lg hidden-md">settings_applications</p>
             </md-list-item>
 
             <!-- <li class="md-list-item">

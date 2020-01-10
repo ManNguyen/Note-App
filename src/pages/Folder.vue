@@ -27,7 +27,7 @@ export default {
     },
     getCards() {
       this.db()
-        .getAll()
+        .getAllNotes()
         .then(noteList => {
           console.log(noteList);
           this.thumbnailList = noteList

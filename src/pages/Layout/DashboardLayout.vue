@@ -6,13 +6,16 @@
       <mobile-menu slot="content"></mobile-menu>
       <!-- <sidebar-link to="/home">
         <md-icon style="margin-left:0;">edit</md-icon>
-      </sidebar-link> -->
+      </sidebar-link>-->
       <sidebar-link to="/folder">
         <md-icon style="margin-left:0;">dashboard</md-icon>
       </sidebar-link>
 
       <li class="md-list-item">
-        <a class="md-list-item-router md-list-item-container md-button-clean" v-on:click="addPage()">
+        <a
+          class="md-list-item-router md-list-item-container md-button-clean"
+          v-on:click="addPage()"
+        >
           <div class="md-list-item-content md-ripple">
             <slot>
               <md-icon style="margin-left:0;">note_add</md-icon>
@@ -20,6 +23,10 @@
           </div>
         </a>
       </li>
+
+      <!-- <sidebar-link to="/settings">
+        <md-icon style="margin-left:0;">settings_applications</md-icon>
+      </sidebar-link> -->
     </side-bar>
 
     <div class="main-panel">

@@ -25,6 +25,7 @@
 
 <script>
 import switchButton from "../components/Misc/SwitchButton";
+import Constants from "../constants";
 import { idbMixin } from "../components/IndexDB/IndexDBmixin";
 export default {
   components: { switchButton },
@@ -38,25 +39,32 @@ export default {
       isDevMode: false
     };
   },
-  created(){
-    console.log("hello settings");
-    
-    this.db().getSettings ().then(x =>{console.log(x)});
+  created() {
+    this.db()
+      .getSetting(Constants.SETTINGS.DEVMODE)
+      .then(s => {
+        this.isDevMode = s.setting;
+      });
   },
   methods: {
-    notifyVue(verticalAlign, horizontalAlign) {
-      var color = Math.floor(Math.random() * 4 + 1);
-      this.$notify({
-        message:
-          "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer.",
-        icon: "add_alert",
-        horizontalAlign: horizontalAlign,
-        verticalAlign: verticalAlign,
-        type: this.type[color]
-      });
-    },
-    setDevMod(b) {
-      console.log(b);
+     setDevMod(isDevMode) { 
+      this.db()
+        .updateSetting({
+          name: Constants.SETTINGS.DEVMODE,
+          setting: isDevMode
+        })
+        .then(() => {
+          var color = Math.floor(Math.random() * 4 + 1);
+          this.$notify({
+            message:isDevMode?
+              "<b>Developer Mode enabled.</b> "
+              :"<b>Developer Mode disabled.</b> ",
+            icon: "add_alert",
+            horizontalAlign: 'center',
+            verticalAlign: 'top', 
+            type: this.type[color]
+          });
+        });
     }
   }
 };

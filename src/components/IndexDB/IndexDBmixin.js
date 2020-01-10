@@ -85,17 +85,21 @@ export const idbMixin = {
           const db = await dbPromise;
           return await db.delete(_note_tbl, key);
         },
-        async getAll() {
+        async getAllNotes() {
           const db = await dbPromise;
           return await db.getAll(_note_tbl);
         },
-
-        async getSettings() {
+        async getSetting(key) {
+          let db = await dbPromise;
+          return await db.get(_settings_tbl, key);
+        },
+        async getAllSettings() {
           const db = await dbPromise;
-          let x = await db.get(_settings_tbl, Constants.SETTINGS.DEVMODE);
-          console.log(x);
-
           return await db.getAll(_settings_tbl);
+        },
+        async updateSetting(data) {
+          const db = await dbPromise;
+          return await db.put(_settings_tbl, data);
         },
         async deleteDataBase() {
           const resolve = deleteDB(_idb_scheme);
