@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import VueRouter from "vue-router";
+import VueHighlightJS from 'vue-highlightjs'
 import App from "./App";
 import { EventBus } from './event-bus.js';
 
@@ -27,6 +28,7 @@ const router = new VueRouter({
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(VueRouter);
+Vue.use(VueHighlightJS)
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);

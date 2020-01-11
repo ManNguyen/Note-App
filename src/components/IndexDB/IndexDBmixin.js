@@ -51,20 +51,6 @@ export const idbMixin = {
               }
             });
 
-
-
-          // var req = settingsStorage.openCursor(Constants.SETTINGS.DEVMODE);
-          // req.onsuccess = function (e) {
-          //   var cursor = e.target.result;
-          //   if (cursor) { // key already exist
-
-          //   } else { // key not exist
-
-          //     console.log("devMode not exists");
-          //   }
-          // };
-
-
         }
       });
 

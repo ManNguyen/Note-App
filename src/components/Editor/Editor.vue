@@ -17,7 +17,7 @@
     <button
       v-if="isDevMode"
       type="button"
-      @click="save();"
+      @click="getNoteJson();"
       class="md-button md-dense md-round md-warning md-theme-default"
       style="float:right;"
     >
@@ -27,17 +27,33 @@
         </div>
       </div>
     </button>
+    <modal style="z-index: 100;" v-show="showModal" v-on:close="closeModal">
+      <template v-slot:header>
+        <h3>{{ note.title}}</h3>
+        <button type="button" class="btn-close" @click="closeModal" aria-label="Close modal">x</button>
+      </template>
+      <template v-slot:body>
+        <pre v-highlightjs="jsonData"><code class="javascript"></code></pre>
+      </template>
+      <template v-slot:footer>
+        <div></div>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
-import Constants from "../../constants"
+import Constants from "../../constants";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import { idbMixin } from "../IndexDB/IndexDBmixin";
+import Modal from "../Modals/Modal";
 
 export default {
   name: "Editor",
+  components: {
+    Modal
+  },
   mixins: [idbMixin],
   props: {
     docID: String
@@ -46,7 +62,9 @@ export default {
     return {
       editor: Object,
       note: Object,
-      isDevMode: false
+      isDevMode: false,
+      showModal: false,
+      jsonData: "..."
     };
   },
   //called when page accessed
@@ -68,12 +86,18 @@ export default {
       });
     this.db()
       .getSetting(Constants.SETTINGS.DEVMODE)
-      .then(st => {this.isDevMode = st.setting});
+      .then(st => {
+        this.isDevMode = st.setting;
+      });
   },
   destroyed() {
     this.save();
   },
   methods: {
+    closeModal() {
+      this.showModal = false;
+    },
+
     save() {
       let id = this.docID;
       var saveObj = this.editor.save().then(savedData => {
@@ -99,6 +123,12 @@ export default {
         console.log(parsedobj);
 
         this.db().updateNote(parsedobj);
+      });
+    },
+    getNoteJson() {
+      var saveObj = this.editor.save().then(savedData => {
+        this.showModal = true;
+        this.jsonData = JSON.stringify(savedData);
       });
     }
   }
