@@ -1,5 +1,5 @@
 import { openDB, deleteDB, wrap, unwrap } from "idb";
-import { EmptyNote } from "./noteTemplate";
+import { EmptyNote, HomeNote } from "./noteTemplate";
 import Constants from "../../constants";
 const _idb_scheme = "sakka-idb";
 const _note_tbl = "notesStorage";
@@ -60,6 +60,10 @@ export const idbMixin = {
           return await db.add(_note_tbl, EmptyNote);
         },
         async getNote(key) {
+          if(key === "home"){
+            return HomeNote;
+          }
+
           let db = await dbPromise;
           return await db.get(_note_tbl, Number(key));
         },

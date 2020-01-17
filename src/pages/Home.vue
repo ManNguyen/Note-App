@@ -4,7 +4,7 @@
       <div class="md-layout-item">
         <md-card>
           <md-card-content>
-                 <Editor docID="tempDoc"></Editor>
+                 <Editor docID="home"></Editor>
           </md-card-content>
         </md-card>
       </div>
