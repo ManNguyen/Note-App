@@ -15,42 +15,46 @@ export const idbMixin = {
     db() {
       var dbPromise = openDB(_idb_scheme, _version, {
         upgrade(db, oldVersion, newVersion, transaction) {
-
-          console.log("upgrade idb from version " + oldVersion + " to version " + newVersion);
+          console.log(
+            "upgrade idb from version " +
+              oldVersion +
+              " to version " +
+              newVersion
+          );
           //Verify Notes Table
           if (!db.objectStoreNames.contains(_note_tbl)) {
-            console.log("Creating Notes Storage ...")
-            db.createObjectStore(_note_tbl, { keyPath: 'id', autoIncrement: true })
-            console.log('Notes Storage Created !');
+            console.log("Creating Notes Storage ...");
+            db.createObjectStore(_note_tbl, {
+              keyPath: "id",
+              autoIncrement: true
+            });
+            console.log("Notes Storage Created !");
           } else {
             console.log("Notes Storage is up to date.");
           }
 
           //Verify Setting Table
           if (!db.objectStoreNames.contains(_settings_tbl)) {
-            console.log("Creating Settings Storage ...")
-            db.createObjectStore(_settings_tbl, { keyPath: 'name', autoIncrement: false })
-            console.log('Settings Storage Created !');
-
-
-
+            console.log("Creating Settings Storage ...");
+            db.createObjectStore(_settings_tbl, {
+              keyPath: "name",
+              autoIncrement: false
+            });
+            console.log("Settings Storage Created !");
           } else {
             console.log("Settings Storage is up to date.");
           }
 
           var settingsStorage = transaction.objectStore(_settings_tbl);
-          settingsStorage.get(Constants.SETTINGS.DEVMODE).then(
-            res => {
-              if (res == undefined) {
-                console.log('Set Default Dev Mode.');
-                settingsStorage.add({
-                  'name': Constants.SETTINGS.DEVMODE,
-                  'setting': false
-
-                })
-              }
-            });
-
+          settingsStorage.get(Constants.SETTINGS.DEVMODE).then(res => {
+            if (res == undefined) {
+              console.log("Set Default Dev Mode.");
+              settingsStorage.add({
+                name: Constants.SETTINGS.DEVMODE,
+                setting: false
+              });
+            }
+          });
         }
       });
 
@@ -60,7 +64,7 @@ export const idbMixin = {
           return await db.add(_note_tbl, EmptyNote);
         },
         async getNote(key) {
-          if(key === "home"){
+          if (key === "home") {
             return HomeNote;
           }
 
@@ -94,7 +98,6 @@ export const idbMixin = {
         async deleteDataBase() {
           const resolve = deleteDB(_idb_scheme);
           console.log(resolve);
-
         }
       };
     }

@@ -2,9 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import VueRouter from "vue-router";
-import VueHighlightJS from 'vue-highlightjs'
+import VueHighlightJS from "vue-highlightjs";
 import App from "./App";
-import { EventBus } from './event-bus.js';
+import { EventBus } from "./event-bus.js";
 
 // router setup
 import routes from "./routes/routes";
@@ -28,7 +28,7 @@ const router = new VueRouter({
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(VueRouter);
-Vue.use(VueHighlightJS)
+Vue.use(VueHighlightJS);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
@@ -43,10 +43,8 @@ new Vue({
     $route(to, from) {
       //When route change collapse the side bar
       this.$sidebar.displaySidebar(false);
-      
-      EventBus.$emit('route-updated', { from: from, to: to });
 
-
+      EventBus.$emit("route-updated", { from: from, to: to });
     }
   },
   data: {

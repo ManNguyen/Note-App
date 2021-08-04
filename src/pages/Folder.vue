@@ -22,8 +22,10 @@ export default {
     this.getCards();
   },
   methods: {
-     deleteCard(card) {
-      this.db().deleteNote(card.id).then(()=>this.getCards());
+    deleteCard(card) {
+      this.db()
+        .deleteNote(card.id)
+        .then(() => this.getCards());
     },
     getCards() {
       this.db()
@@ -48,5 +50,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

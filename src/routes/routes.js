@@ -12,22 +12,17 @@ import Folder from "@/pages/Folder";
 import Note from "@/pages/Note.vue";
 import Settings from "@/pages/Settings";
 
-
-
 const routes = [
   {
     path: "/",
     component: DashboardLayout,
     redirect: "/folder",
     children: [
-      { path: "home",
-        name: "Home", 
-        component: Home 
-      },
-      { 
+      { path: "home", name: "Home", component: Home },
+      {
         path: "note/:note_id",
-        name: "Note", 
-        component: Note 
+        name: "Note",
+        component: Note
       },
       {
         path: "dashboard",

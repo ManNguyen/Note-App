@@ -1,10 +1,10 @@
 <template>
-    <div class="content">
+  <div class="content">
     <div class="md-layout">
       <div class="md-layout-item">
         <md-card>
           <md-card-content>
-                 <Editor docID="home"></Editor>
+            <Editor docID="home"></Editor>
           </md-card-content>
         </md-card>
       </div>
@@ -16,12 +16,10 @@
 import Editor from "../components/Editor/Editor.vue";
 
 export default {
-  components:{
+  components: {
     Editor
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
