@@ -1,9 +1,9 @@
-<template >
+<template>
   <div>
     <div id="editorjs"></div>
     <button
       type="button"
-      @click="save();"
+      @click="save()"
       class="md-button md-dense md-round md-success md-theme-default"
       style="float:right;"
     >
@@ -17,7 +17,7 @@
     <button
       v-if="isDevMode"
       type="button"
-      @click="getNoteJson();"
+      @click="getNoteJson()"
       class="md-button md-dense md-round md-warning md-theme-default"
       style="float:right;"
     >
@@ -29,8 +29,15 @@
     </button>
     <modal style="z-index: 100;" v-show="showModal" v-on:close="closeModal">
       <template v-slot:header>
-        <h3>{{ note.title}}</h3>
-        <button type="button" class="btn-close" @click="closeModal" aria-label="Close modal">x</button>
+        <h3>{{ note.title }}</h3>
+        <button
+          type="button"
+          class="btn-close"
+          @click="closeModal"
+          aria-label="Close modal"
+        >
+          x
+        </button>
       </template>
       <template v-slot:body>
         <pre v-highlightjs="jsonData"><code class="javascript"></code></pre>
@@ -46,17 +53,18 @@
 import Constants from "../../constants";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
+import SimpleImage from "@editorjs/simple-image";
 import { idbMixin } from "../IndexDB/IndexDBmixin";
 import Modal from "../Modals/Modal";
 
 export default {
   name: "Editor",
   components: {
-    Modal
+    Modal,
   },
   mixins: [idbMixin],
   props: {
-    docID: String
+    docID: String,
   },
   data: function() {
     return {
@@ -64,29 +72,30 @@ export default {
       note: Object,
       isDevMode: false,
       showModal: false,
-      jsonData: "..."
+      jsonData: "...",
     };
   },
   //called when page accessed
   created() {
     this.db()
       .getNote(this.docID)
-      .then(note => {
+      .then((note) => {
         console.log(note);
         this.note = note;
         this.editor = new EditorJS({
           holderId: "editorjs",
           autofocus: true,
           tools: {
-            header: Header
-            // list: List
+            header: Header,
+            image:SimpleImage
           },
-          data: note.bodyBlock
+          data: note.bodyBlock,
         });
       });
+
     this.db()
       .getSetting(Constants.SETTINGS.DEVMODE)
-      .then(st => {
+      .then((st) => {
         this.isDevMode = st.setting;
       });
   },
@@ -100,7 +109,7 @@ export default {
 
     save() {
       let id = this.docID;
-      var saveObj = this.editor.save().then(savedData => {
+      var saveObj = this.editor.save().then((savedData) => {
         //This to get the object out of obsever
         var parsedobj = JSON.parse(JSON.stringify(this.note));
         parsedobj.bodyBlock = savedData;
@@ -108,14 +117,14 @@ export default {
         var newTitle = parsedobj.title;
 
         var titleBlocks = savedData.blocks
-          .filter(block => block.type == "header")
+          .filter((block) => block.type == "header")
           .sort((a, b) => a.data.level - b.data.level);
         //Title should be updated to the first header block,
         console.log(titleBlocks);
         if (titleBlocks.length > 0) {
           newTitle = titleBlocks[0].data.text;
         } else {
-          newTitle = "Note #" + id;
+          newTitle = "📝 #" + id;
         }
 
         parsedobj.title = newTitle;
@@ -126,12 +135,12 @@ export default {
       });
     },
     getNoteJson() {
-      var saveObj = this.editor.save().then(savedData => {
+      var saveObj = this.editor.save().then((savedData) => {
         this.showModal = true;
         this.jsonData = JSON.stringify(savedData);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

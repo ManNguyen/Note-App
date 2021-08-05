@@ -1,15 +1,15 @@
 <template>
   <md-card>
-    <div class="notecard" >
+    <div class="notecard">
       <md-card-content>
         <div class="header">
           <h4 class="title">
             <md-icon>note</md-icon>
-            {{noteInfo.title}}
+            {{ noteInfo.title }}
           </h4>
 
           <div>
-            <p class="category date">{{timeFilter()}}</p>
+            <p class="category date">{{ timeFilter() }}</p>
           </div>
         </div>
       </md-card-content>
@@ -20,7 +20,11 @@
               <md-icon>launch</md-icon>
             </div>
           </button>
-          <button type="button" class="md-button md-small" v-on:click="deleteNote">
+          <button
+            type="button"
+            class="md-button md-small"
+            v-on:click="deleteNote"
+          >
             <div class="md-ripple">
               <md-icon>delete</md-icon>
             </div>
@@ -40,18 +44,17 @@ export default {
     launch() {
       this.$router.push("/note/" + this.noteInfo.id);
     },
-    deleteNote(){
-      this.$emit("onDelete",this.noteInfo);
+    deleteNote() {
+      this.$emit("onDelete", this.noteInfo);
     },
     timeFilter() {
       return moment(this.noteInfo.date).format("MMMM Do YYYY, h:mm");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-
 .notecard:after {
   background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
   background-repeat: no-repeat;
@@ -66,7 +69,6 @@ export default {
   transition: 0s;
 }
 
-
 .notecard .header > .title,
 .date {
   display: inline-block;
@@ -74,7 +76,7 @@ export default {
 .notecard .header > .date {
   float: right;
 }
-#cardButtonDiv .md-button.md-small >.md-ripple{
+#cardButtonDiv .md-button.md-small > .md-ripple {
   padding: 5px;
 }
 </style>

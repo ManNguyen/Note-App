@@ -1,4 +1,4 @@
 const DEVMODE = "DEVMODE";
 
-const SETTINGS ={ DEVMODE:DEVMODE};
-export default {SETTINGS};
+const SETTINGS = { DEVMODE: DEVMODE };
+export default { SETTINGS };

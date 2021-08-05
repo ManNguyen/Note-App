@@ -83,21 +83,21 @@ export default {
         "Angela Martin",
         "Kelly Kapoor",
         "Ryan Howard",
-        "Kevin Malone"
-      ]
+        "Kevin Malone",
+      ],
     };
   },
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
-    getRouteName(){
-      if (this.$route.name ==="Note"){
-        return "Note #"+ this.$route.params.note_id;
+    getRouteName() {
+      if (this.$route.name === "Note") {
+        return "📝  #" + this.$route.params.note_id;
       }
-      return  this.$route.name ;
-    }
-  }
+      return this.$route.name;
+    },
+  },
 };
 </script>
 
