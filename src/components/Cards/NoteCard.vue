@@ -49,8 +49,8 @@ export default {
     },
     timeFilter() {
       return moment(this.noteInfo.date).format("MMMM Do YYYY, h:mm");
-    },
-  },
+    }
+  }
 };
 </script>
 

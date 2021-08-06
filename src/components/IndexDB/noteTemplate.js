@@ -3,18 +3,18 @@ let defaultBody = {
     {
       data: {
         level: 1,
-        text: "Untitled",
+        text: "Untitled"
       },
-      type: "header",
-    },
-  ],
+      type: "header"
+    }
+  ]
 };
 
 let EmptyNote = {
   title: "Untitled",
   date: new Date(),
   createdDate: new Date(),
-  bodyBlock: defaultBody,
+  bodyBlock: defaultBody
 };
 
 let homePageBody = {
@@ -25,18 +25,18 @@ let homePageBody = {
       type: "paragraph",
       data: {
         text:
-          "<b>Sakka</b> is a note editor that stores your texts, documents in the web browser. There is <b>no online storage</b> involved in this application, all of your notes, poems, novel, memos, etc are stored locally in your machine.&nbsp;&nbsp;",
-      },
-    },
+          "<b>Sakka</b> is a note editor that stores your texts, documents in the web browser. There is <b>no online storage</b> involved in this application, all of your notes, poems, novel, memos, etc are stored locally in your machine.&nbsp;&nbsp;"
+      }
+    }
   ],
-  version: "2.16.1",
+  version: "2.16.1"
 };
 
 let HomeNote = {
   title: "Home Page",
   date: new Date(),
   createdDate: new Date(),
-  bodyBlock: homePageBody,
+  bodyBlock: homePageBody
 };
 
 export { EmptyNote, HomeNote };

@@ -60,11 +60,11 @@ import Modal from "../Modals/Modal";
 export default {
   name: "Editor",
   components: {
-    Modal,
+    Modal
   },
   mixins: [idbMixin],
   props: {
-    docID: String,
+    docID: String
   },
   data: function() {
     return {
@@ -72,14 +72,14 @@ export default {
       note: Object,
       isDevMode: false,
       showModal: false,
-      jsonData: "...",
+      jsonData: "..."
     };
   },
   //called when page accessed
   created() {
     this.db()
       .getNote(this.docID)
-      .then((note) => {
+      .then(note => {
         console.log(note);
         this.note = note;
         this.editor = new EditorJS({
@@ -87,15 +87,15 @@ export default {
           autofocus: true,
           tools: {
             header: Header,
-            image:SimpleImage
+            image: SimpleImage
           },
-          data: note.bodyBlock,
+          data: note.bodyBlock
         });
       });
 
     this.db()
       .getSetting(Constants.SETTINGS.DEVMODE)
-      .then((st) => {
+      .then(st => {
         this.isDevMode = st.setting;
       });
   },
@@ -109,7 +109,7 @@ export default {
 
     save() {
       let id = this.docID;
-      var saveObj = this.editor.save().then((savedData) => {
+      var saveObj = this.editor.save().then(savedData => {
         //This to get the object out of obsever
         var parsedobj = JSON.parse(JSON.stringify(this.note));
         parsedobj.bodyBlock = savedData;
@@ -117,7 +117,7 @@ export default {
         var newTitle = parsedobj.title;
 
         var titleBlocks = savedData.blocks
-          .filter((block) => block.type == "header")
+          .filter(block => block.type == "header")
           .sort((a, b) => a.data.level - b.data.level);
         //Title should be updated to the first header block,
         console.log(titleBlocks);
@@ -135,12 +135,12 @@ export default {
       });
     },
     getNoteJson() {
-      var saveObj = this.editor.save().then((savedData) => {
+      var saveObj = this.editor.save().then(savedData => {
         this.showModal = true;
         this.jsonData = JSON.stringify(savedData);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

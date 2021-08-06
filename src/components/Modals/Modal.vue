@@ -15,7 +15,9 @@
               class="btn-close"
               @click="close"
               aria-label="Close modal"
-            >x</button>
+            >
+              x
+            </button>
           </slot>
         </header>
         <section class="modal-body" id="modalDescription">
@@ -29,7 +31,9 @@
               class="btn-green"
               @click="close"
               aria-label="Close modal"
-            >Close me!</button>
+            >
+              Close me!
+            </button>
           </slot>
         </footer>
       </div>
@@ -47,7 +51,7 @@ export default {
   }
 };
 </script>
-<style >
+<style>
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -71,7 +75,7 @@ export default {
   width: 80%;
   top: 20px;
   max-height: 90%;
-   display: flex;
+  display: flex;
   position: absolute;
 }
 
@@ -99,7 +103,7 @@ export default {
 .modal-body {
   position: relative;
   padding: 25px 10px;
-  
+
   overflow-y: auto;
 }
 

@@ -83,8 +83,8 @@ export default {
         "Angela Martin",
         "Kelly Kapoor",
         "Ryan Howard",
-        "Kevin Malone",
-      ],
+        "Kevin Malone"
+      ]
     };
   },
   methods: {
@@ -96,8 +96,8 @@ export default {
         return "📝  #" + this.$route.params.note_id;
       }
       return this.$route.name;
-    },
-  },
+    }
+  }
 };
 </script>
 

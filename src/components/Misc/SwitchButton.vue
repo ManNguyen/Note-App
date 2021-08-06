@@ -7,8 +7,7 @@
       class="switch-button"
       :class="{ enabled: isEnabled }"
       @click="toggle"
-      :style="{'--color': color}"
-      
+      :style="{ '--color': color }"
     >
       <div class="button"></div>
     </div>
@@ -36,7 +35,7 @@ export default {
   }
 };
 </script>
-<style >
+<style>
 .switch-button-control {
   display: flex;
   flex-direction: row;

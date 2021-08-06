@@ -13,7 +13,8 @@
                   v-model="isDevMode"
                   v-on:toggle="setDevMod"
                   color="#43a047"
-                >Enable Developer Mode</switch-button>
+                  >Enable Developer Mode</switch-button
+                >
               </div>
             </div>
           </md-card-content>
@@ -47,7 +48,7 @@ export default {
       });
   },
   methods: {
-     setDevMod(isDevMode) { 
+    setDevMod(isDevMode) {
       this.db()
         .updateSetting({
           name: Constants.SETTINGS.DEVMODE,
@@ -56,12 +57,12 @@ export default {
         .then(() => {
           var color = Math.floor(Math.random() * 4 + 1);
           this.$notify({
-            message:isDevMode?
-              "<b>Developer Mode enabled.</b> "
-              :"<b>Developer Mode disabled.</b> ",
+            message: isDevMode
+              ? "<b>Developer Mode enabled.</b> "
+              : "<b>Developer Mode disabled.</b> ",
             icon: "add_alert",
-            horizontalAlign: 'center',
-            verticalAlign: 'top', 
+            horizontalAlign: "center",
+            verticalAlign: "top",
             type: this.type[color]
           });
         });
